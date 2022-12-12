@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Virtual environments
+.venv
+env/
+venv/
+
+# Environments
+.env
+local.env
+
+# IDE config files
+.vscode
+.idea
+
+# Volumes
+data/
+
+# Sqlite
+*.sqlite3
+
+# Log files
+*log
