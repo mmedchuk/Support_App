@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
+from users.constrants.roles import Role
 from users.managers import UserManager
 
 
@@ -11,8 +12,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    role = models.CharField(max_length=100)
-
+    role = models.CharField(max_length=100, choices=Role.values())
     objects = UserManager()
 
     EMAIL_FIELD = "email"
@@ -33,3 +33,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         """Return the short name for the user."""
         return self.first_name
+
+    def __str__(self) -> str:
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.email
