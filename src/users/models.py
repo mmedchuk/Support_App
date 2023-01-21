@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
-from users.constrants.roles import Role
+from users.constants.roles import Role
 from users.managers import UserManager
 
 
