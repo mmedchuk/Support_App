@@ -2,13 +2,13 @@ from django.contrib.auth import get_user_model
 from django.urls import path
 from rest_framework.generics import CreateAPIView
 
-from users.serializers import UserRegistrationSerializer
+from users.serializers import UserSerializer
 
 User = get_user_model()
 
 
 class UserCreateAPI(CreateAPIView):
-    serializer_class = UserRegistrationSerializer
+    serializer_class = UserSerializer
 
 
 urlpatterns = [
