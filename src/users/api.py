@@ -4,7 +4,11 @@ from rest_framework.viewsets import ViewSet
 
 from shared.serializers import ResponseMultiSerializer, ResponseSerializer
 from users.models import User
-from users.serializers import UserRegistrationSerializer, UserSerializer, UserUpdateSerializer
+from users.serializers import (
+    UserRegistrationSerializer,
+    UserSerializer,
+    UserUpdateSerializer,
+)
 
 
 class UserAPISet(ViewSet):
@@ -15,12 +19,9 @@ class UserAPISet(ViewSet):
 
         return JsonResponse(response.data)
 
-    
     def create(self, request):
         context: dict = {"request": self.request}
-        serializer = UserRegistrationSerializer(
-            data=request.data, context=context
-        )
+        serializer = UserRegistrationSerializer(data=request.data, context=context)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         response = ResponseSerializer({"result": serializer.data})
@@ -34,14 +35,11 @@ class UserAPISet(ViewSet):
 
         return JsonResponse(response.data)
 
-
     def update(self, request, id_: int):
         instance = User.objects.get(id=id_)
 
         context: dict = {"request": self.request}
-        serializer = UserUpdateSerializer(
-            instance, data=request.data, context=context
-        )
+        serializer = UserUpdateSerializer(instance, data=request.data, context=context)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 

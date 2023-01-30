@@ -1,10 +1,7 @@
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+import rest_framework_simplejwt.views as views
 from django.urls import path
 
 urlpatterns = [
-    path("token/", TokenObtainPairView.as_view()),
-    path("token/refresh/", TokenRefreshView.as_view()),
+    path("token/", views.TokenObtainPairView.as_view()),
+    path("token/refresh/", views.TokenRefreshView.as_view()),
 ]

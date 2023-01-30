@@ -1,9 +1,10 @@
-from tickets.serializers import TicketSerializer, TicketLightSerializer
 from django.http import JsonResponse
-from tickets.models import Ticket
-from rest_framework.viewsets import ViewSet
 from rest_framework import status
-from shared.serializers import ResponseSerializer, ResponseMultiSerializer
+from rest_framework.viewsets import ViewSet
+
+from shared.serializers import ResponseMultiSerializer, ResponseSerializer
+from tickets.models import Ticket
+from tickets.serializers import TicketLightSerializer, TicketSerializer
 
 
 class TicketAPISet(ViewSet):
@@ -29,7 +30,7 @@ class TicketAPISet(ViewSet):
         response = ResponseSerializer({"result": serializer.data})
 
         return JsonResponse(response.data, status=status.HTTP_201_CREATED)
-    
+
     def update(self, request, id_: int):
         instance = Ticket.objects.get(id=id_)
         context: dict = {"request": self.request}

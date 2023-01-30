@@ -1,9 +1,8 @@
 from django.urls import path
+
 from users.api import UserAPISet
 
-
 urlpatterns = [
-   
     path(
         "",
         UserAPISet.as_view(
@@ -15,8 +14,6 @@ urlpatterns = [
     ),
     path(
         "<int:id_>/",
-        UserAPISet.as_view(
-            {"get": "retrieve", "put": "update"}
-        ),
+        UserAPISet.as_view({"get": "retrieve", "put": "update"}),
     ),
 ]
