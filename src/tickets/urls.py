@@ -1,9 +1,18 @@
 from django.urls import path
 
-from tickets.api import ticket_create, ticket_retrieve, tickets_list
-
+from tickets.api import TicketAPISet
 urlpatterns = [
-    path("", tickets_list),
-    path("", ticket_create),
-    path("<int:id_>/", ticket_retrieve),
+     path("", 
+     TicketAPISet.as_view(
+            {"get": "list",
+            "post": "create",
+            }
+        ),
+    ),
+    path("<int:id_>/",
+        TicketAPISet.as_view(
+            {"get": "retrieve", 
+            "put": "update"}
+        ),
+    ),
 ]

@@ -19,7 +19,9 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt"]
+THIRD_PARTY_APPS = [
+    "rest_framework", 
+    "rest_framework_simplejwt"]
 
 LOCAL_APPS = [
     "exchange_rates",
@@ -113,12 +115,12 @@ ALPHA_VANTAGE_BASE_URL = getenv(
     "ALPHA_VANTAGE_BASE_URL", default="https://www.alphavantage.co"
 )
 
+# ###################
 # DRF configuration
+#####################
+
 REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": (
-        "rest_framework.renderers.JSONRenderer",
-        "rest_framework.renderers.BrowsableAPIRenderer",
-    ),
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
