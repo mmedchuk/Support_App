@@ -109,9 +109,7 @@ AUTH_USER_MODEL = "users.User"
 
 # Exchange rates service (Alpha Vantage)
 ALPHA_VANTAGE_API_KEY = getenv("ALPHA_VANTAGE_API_KEY")
-ALPHA_VANTAGE_BASE_URL = getenv(
-    "ALPHA_VANTAGE_BASE_URL", default="https://www.alphavantage.co"
-)
+ALPHA_VANTAGE_BASE_URL = getenv("ALPHA_VANTAGE_BASE_URL", default="https://www.alphavantage.co")
 
 # ###################
 # DRF configuration
@@ -122,9 +120,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication"
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework_simplejwt.authentication.JWTAuthentication"],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
 }
 

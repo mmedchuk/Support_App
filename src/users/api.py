@@ -4,11 +4,7 @@ from rest_framework.viewsets import ViewSet
 
 from shared.serializers import ResponseMultiSerializer, ResponseSerializer
 from users.models import User
-from users.serializers import (
-    UserRegistrationSerializer,
-    UserSerializer,
-    UserUpdateSerializer,
-)
+from users.serializers import UserRegistrationSerializer, UserSerializer, UserUpdateSerializer
 
 
 class UserAPISet(ViewSet):
