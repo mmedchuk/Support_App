@@ -40,9 +40,3 @@ class TicketAPISet(ViewSet):
         response = ResponseSerializer({"result": serializer.data})
 
         return JsonResponse(response.data)
-
-
-ticket_create = TicketAPISet.as_view({"post": "create"})
-tickets_list = TicketAPISet.as_view({"get": "list"})
-ticket_retrieve = TicketAPISet.as_view({"get": "retrieve"})
-ticket_update = TicketAPISet.as_view({"put": "update"})
