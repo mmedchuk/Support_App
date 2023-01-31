@@ -6,14 +6,19 @@ from tickets.models import Ticket
 class TicketCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        exclude = ["body", "manager"]
+        fields = ["header", "body"]
 
 
 class TicketLightSerializer(serializers.ModelSerializer):
-    customer = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    class Meta:
+        model = Ticket
+        exclude = ["body", "manager"]
 
 
 class TicketSerializer(serializers.ModelSerializer):
+    customer = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Ticket
+        fields = "__all__"
         fields = ["id", "header", "body", "customer"]

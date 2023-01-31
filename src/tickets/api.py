@@ -6,8 +6,6 @@ from shared.serializers import ResponseMultiSerializer, ResponseSerializer
 from tickets.models import Ticket
 from tickets.serializers import TicketLightSerializer, TicketSerializer
 
-# Create your views here.
-
 
 class TicketAPISet(ViewSet):
     def list(self, request):
@@ -33,7 +31,12 @@ class TicketAPISet(ViewSet):
 
         return JsonResponse(response.data, status=status.HTTP_201_CREATED)
 
+    def update(self, request, id_: int):
+        instance = Ticket.objects.get(id=id_)
+        context: dict = {"request": self.request}
+        serializer = TicketSerializer(instance, data=request.data, context=context)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        response = ResponseSerializer({"result": serializer.data})
 
-ticket_create = TicketAPISet.as_view({"post": "create"})
-tickets_list = TicketAPISet.as_view({"get": "list"})
-ticket_retrieve = TicketAPISet.as_view({"get": "retrieve"})
+        return JsonResponse(response.data)

@@ -1,7 +1,19 @@
 from django.urls import path
 
-from users.api import UserCreateAPI
+from users.api import UserAPISet
 
 urlpatterns = [
-    path("", UserCreateAPI.as_view()),
+    path(
+        "",
+        UserAPISet.as_view(
+            {
+                "get": "list",
+                "post": "create",
+            }
+        ),
+    ),
+    path(
+        "<int:id_>/",
+        UserAPISet.as_view({"get": "retrieve", "put": "update"}),
+    ),
 ]
