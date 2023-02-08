@@ -22,6 +22,14 @@ class IsOwner(BasePermission):
         return obj.customer == request.user
 
 
+class IsManagerProcessing(BasePermission):
+    def has_permission(self, request, view):
+        return True
+
+    def has_object_permission(self, request, view, obj: Ticket):
+        return obj.manager == request.user
+
+
 class RoleIsUser(BasePermission):
     def has_permission(self, request, view):
         return request.user.role == Role.USER

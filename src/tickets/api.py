@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from shared.serializers import ResponseMultiSerializer, ResponseSerializer
 from tickets.models import Ticket
-from tickets.permissions import IsOwner, RoleIsAdmin, RoleIsManager, RoleIsUser
+from tickets.permissions import IsManagerProcessing, IsOwner, RoleIsAdmin, RoleIsManager, RoleIsUser
 from tickets.serializers import TicketLightSerializer, TicketSerializer
 
 
@@ -18,15 +18,15 @@ class TicketAPISet(ModelViewSet):
         Instantiates and returns the list of permissions that this view requires.
         """
         if self.action == "list":
-            permission_classes = [RoleIsAdmin]
+            permission_classes = [RoleIsAdmin | RoleIsManager]
         elif self.action == "create":
             permission_classes = [RoleIsUser]
         elif self.action == "retrieve":
-            permission_classes = (IsOwner | RoleIsAdmin | RoleIsManager,)
+            permission_classes = [IsOwner | RoleIsAdmin | IsManagerProcessing]
         elif self.action == "update":
-            permission_classes = [RoleIsManager]
+            permission_classes = [RoleIsAdmin | RoleIsManager]
         elif self.action == "destroy":
-            permission_classes = [RoleIsAdmin]
+            permission_classes = [RoleIsAdmin, IsManagerProcessing]
         else:
             permission_classes = []
 
@@ -38,7 +38,7 @@ class TicketAPISet(ModelViewSet):
         response = ResponseMultiSerializer({"results": serializer.data})
         return JsonResponse(response.data)
 
-    def retrieve(self, request, id_: int):
+    def retrieve(self, request, pk: int):
         instance = self.get_object()
         serializer = TicketSerializer(instance)
         response = ResponseSerializer({"result": serializer.data})
@@ -55,7 +55,7 @@ class TicketAPISet(ModelViewSet):
 
         return JsonResponse(response.data, status=status.HTTP_201_CREATED)
 
-    def update(self, request, id_: int):
+    def update(self, request, pk: int):
         instance: Ticket = self.get_object()
         context: dict = {"request": self.request}
         serializer = TicketSerializer(instance, data=request.data, context=context)
