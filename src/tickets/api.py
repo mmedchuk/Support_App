@@ -24,7 +24,7 @@ class TicketAPISet(ModelViewSet):
         elif self.action == "retrieve":
             permission_classes = [IsOwner | RoleIsAdmin | IsManagerProcessing]
         elif self.action == "update":
-            permission_classes = [RoleIsAdmin | RoleIsManager]
+            permission_classes = [RoleIsAdmin | IsManagerProcessing]
         elif self.action == "destroy":
             permission_classes = [RoleIsAdmin, IsManagerProcessing]
         else:
