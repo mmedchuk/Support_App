@@ -21,4 +21,4 @@ class CommentSerializer(serializers.ModelSerializer):
         attrs["user"] = request.user
         attrs["prev_comment"] = last_comment
 
-        return
+        return attrs
