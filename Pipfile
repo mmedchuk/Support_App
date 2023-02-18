@@ -6,10 +6,11 @@ name = "pypi"
 [packages]
 Django = "~=4.1.4"
 Pydantic = "~=1.10.2"
-psycopg =  "==3.1.4"
+psycopg2-binary =  "==2.9.5"
 requests = "==2.28.1"
 djangorestframework = "~=3.14.0"
 djangorestframework-simplejwt = "==5.2.2"
+
 
 
 [dev-packages]
