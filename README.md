@@ -4,7 +4,7 @@
 
 ![https://img.shields.io/badge/python_versions-3.10+-blue.svg](https://img.shields.io/badge/python_versions-3.10+-blue.svg)
 
-[https://img.shields.io/badge/django-4.1.0-blue](https://img.shields.io/badge/django-4.1.0-blue)
+![https://img.shields.io/badge/django-4.1.0-blue](https://img.shields.io/badge/django-4.1.0-blue)
 
 ![https://github.com/mmedchuk/support_app/actions/workflows/code_quality.yml/badge.svg?branch=main](https://github.com/mmedchuk/support_app/actions/workflows/code_quality.yml/badge.svg?branch=main)
 
