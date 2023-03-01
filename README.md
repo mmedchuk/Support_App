@@ -160,7 +160,6 @@ gunicorn src.config.wsgi:application -c gunicorn.conf.py
 **Database:**
 
 ```mermaid
-API DB Schema
 erDiagram
 
     Users {
