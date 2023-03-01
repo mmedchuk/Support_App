@@ -160,8 +160,9 @@ gunicorn src.config.wsgi:application -c gunicorn.conf.py
 **Database:**
 
 ```mermaid
-erDiagram
 API DB Schema
+erDiagram
+
     Users {
         int id
         string frist_name
