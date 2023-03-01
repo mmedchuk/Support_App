@@ -1,5 +1,8 @@
 FROM --platform=linux/x86_64 python:3.10.7-slim
 
+# Pre-build variables
+ARG PIPENV_EXTRA_ARGS
+
 #For STDIN STDOUT
 ENV PYTHONUNBUFFERED=1
 
@@ -16,7 +19,7 @@ RUN apt-get update \
 RUN pip install --upgrade pip pipenv setuptools
 
 COPY Pipfile Pipfile.lock ./
-RUN pipenv sync --system
+RUN pipenv sync --system ${PIPENV_EXTRA_ARGS}
 
 
 # Current PATH where Docker will copy a current project into folder 'APP'. 

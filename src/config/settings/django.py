@@ -1,8 +1,7 @@
-from datetime import timedelta
 from os import getenv
 from pathlib import Path
 
-SRC_DIR = Path(__file__).resolve().parent.parent
+SRC_DIR = Path(__file__).resolve().parent.parent.parent
 ROOT_DIR = SRC_DIR.parent
 
 SECRET_KEY = getenv("DJANGO_SECRET_KEY", default="INVALID")
@@ -101,37 +100,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+STATIC_ROOT = ROOT_DIR / "staticfiles/"
 STATIC_URL = "static/"
 
 
-#####################
 # Set custom user model
-#####################
+# -----------------------------------------------
 AUTH_USER_MODEL = "users.User"
-
-
-# Exchange rates service (Alpha Vantage)
-ALPHA_VANTAGE_API_KEY = getenv("ALPHA_VANTAGE_API_KEY")
-ALPHA_VANTAGE_BASE_URL = getenv("ALPHA_VANTAGE_BASE_URL", default="https://www.alphavantage.co")
-
-# ###################
-# DRF configuration
-#####################
-
-REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
-    "DEFAULT_PARSER_CLASSES": [
-        "rest_framework.parsers.JSONParser",
-    ],
-    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework_simplejwt.authentication.JWTAuthentication"],
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
-}
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=30),
-    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
-    "AUTH_HEADER_TYPES": ("Bearer",),
-}

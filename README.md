@@ -2,15 +2,22 @@
 
 # Support App
 
-![https://img.shields.io/badge/python_versions-3.10+-blue.svg](https://img.shields.io/badge/python_versions-3.10+-blue.svg)
+<a href="https://www.python.org/downloads/release/python-3100/">
+    <img src="https://img.shields.io/badge/python_versions-3.10+-blue.svg">
+</a>
+<a href="https://www.djangoproject.com/">
+    <img src="https://img.shields.io/badge/django-4.1.0-blue">
+</a>
+<a img src="https://img.shields.io/badge/django-4.1.0-blue/">
+</a>
 
-![https://img.shields.io/badge/django-4.1.0-blue](https://img.shields.io/badge/django-4.1.0-blue)
+![Build Status](https://github.com/mmedchuk/support_app/actions/workflows/code_quality.yml/badge.svg?branch=main)
+</br>
 
-![https://github.com/mmedchuk/support_app/actions/workflows/code_quality.yml/badge.svg?branch=main](https://github.com/mmedchuk/support_app/actions/workflows/code_quality.yml/badge.svg?branch=main)
+<p align="left"><span style="font-style: italic; font-weight: bold">Support app</span> is an application created to help in communication with customers to solve issues. It`s suitable for projects were communication app between users is needed like web services, marketplaces, online shops, etc... </p>
+</br>
 
-***Support app*** is an application created to help in communication with customers to solve issues. It`s suitable for projects were communication app between users is needed like web services, marketplaces, online shops, etc…
-
-## :gear: Application is powered by
+## Application is powered by
 
 **Core tools**
 
@@ -22,6 +29,13 @@
 - ✔️ [black](https://github.com/psf/black)
 - ✔️ [flake8](https://github.com/pycqa/flake8)
 - ✔️ [isort](https://github.com/PyCQA/isort)
+- ✔️ [mypy](https://github.com/python/mypy)
+
+**Additional tools**
+- ✔️ [Docker](https://www.docker.com)
+- ✔️ [Gunicorn](https://gunicorn.org/)
+
+</br>
 
 ## ⚠️ Mandatory steps
 
@@ -37,7 +51,11 @@ git clone https://github.com/mmedchuk/support_app
 - Install Pipenv Enviroment and initialize it.
 
 ```bash
-#Install Pipenvpip install pipenv#Initializationpipenv shell
+#Install Pipenv
+pip install pipenv
+
+#Initialization of virtual enviroment
+pipenv shell
 ```
 
 - Install depencities from Lock file.
@@ -52,18 +70,39 @@ pipenv sync
 ```bash
 pre-commit install
 ```
+<br>
 
-## 🏃 Start working with application
+## 🏃 Quickstart
 
-To start wirking with thes project you can use Docker-compose
+
+We tried to make getting started with our app quick and painless. To start quick use we implement Docker technology which takes care of most of the installation process for this API. 
+To start installation run the following steps:
+<ol>
+<li>Make sure you have installed Python
+<li>Install an appopriate Docker version
+<li> Run Docker-compose command to start installation
 
 ```bash
-docker-compose up -d
+# Build images
+docker-compose build
+
+# Build image from scratch witout cache
+docker-compose build --no-cache
 ```
+<li> Wait a few time when Docker when install ang configure all tools
+<li> After installation you can use our API
 
-Other usefull commands:
+</ol>
+
+</br>
+
+##  ➕ Some usefull Docker-compose commands
+
 
 ```bash
+# Run container
+docker-compose up -d
+
 # Build images
 docker-compose build
 
@@ -91,7 +130,22 @@ docker-compose logs --tail 10 app
 docker-compose logs -f app
 ```
 
-**Application description:**
+</br>
+
+## Additional information
+
+### Usefull commands:
+
+```bash
+# Run project with Gunicorn server
+gunicorn src.config.wsgi:application --localhost:8000
+
+# Run project with Gunicorn server configused in the separate conf.file
+gunicorn src.config.wsgi:application -c gunicorn.conf.py
+
+```
+
+### Application description:
 
 ```
 ▾ users
@@ -107,6 +161,7 @@ docker-compose logs -f app
 
 ```mermaid
 erDiagram
+
     Users {
         int id
         string frist_name
