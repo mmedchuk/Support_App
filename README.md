@@ -1,23 +1,21 @@
-# README
-
 # Support App
 
 <a href="https://www.python.org/downloads/release/python-3100/">
-    <img src="https://img.shields.io/badge/python_versions-3.10+-blue.svg">
-</a>
+    <img src="https://img.shields.io/badge/python_versions-3.10+-blue.svg"></a>
 <a href="https://www.djangoproject.com/">
-    <img src="https://img.shields.io/badge/django-4.1.0-blue">
-</a>
+    <img src="https://img.shields.io/badge/django-4.1.0-blue"></a>
 <a img src="https://img.shields.io/badge/django-4.1.0-blue/">
 </a>
 
 ![Build Status](https://github.com/mmedchuk/support_app/actions/workflows/code_quality.yml/badge.svg?branch=main)
+
 </br>
 
 <p align="left"><span style="font-style: italic; font-weight: bold">Support app</span> is an application created to help in communication with customers to solve issues. It`s suitable for projects were communication app between users is needed like web services, marketplaces, online shops, etc... </p>
 </br>
 
-## Application is powered by
+---
+## 🔌 Application is powered by
 
 **Core tools**
 
@@ -35,6 +33,7 @@
 - ✔️ [Docker](https://www.docker.com)
 - ✔️ [Gunicorn](https://gunicorn.org/)
 
+---
 </br>
 
 ## ⚠️ Mandatory steps
@@ -70,11 +69,10 @@ pipenv sync
 ```bash
 pre-commit install
 ```
+---
 <br>
 
 ## 🏃 Quickstart
-
-
 We tried to make getting started with our app quick and painless. To start quick use we implement Docker technology which takes care of most of the installation process for this API. 
 To start installation run the following steps:
 <ol>
@@ -86,7 +84,7 @@ To start installation run the following steps:
 # Build images
 docker-compose build
 
-# Build image from scratch witout cache
+# Build image from scratch without cache
 docker-compose build --no-cache
 ```
 <li> Wait a few time when Docker when install ang configure all tools
@@ -96,7 +94,7 @@ docker-compose build --no-cache
 
 </br>
 
-##  ➕ Some usefull Docker-compose commands
+### ➕  Some usefull Docker-compose commands
 
 
 ```bash
@@ -132,7 +130,7 @@ docker-compose logs -f app
 
 </br>
 
-## Additional information
+## ➕ Additional information
 
 ### Usefull commands:
 
@@ -144,8 +142,10 @@ gunicorn src.config.wsgi:application --localhost:8000
 gunicorn src.config.wsgi:application -c gunicorn.conf.py
 
 ```
+---
+</br>
 
-### Application description:
+## 🧩 Application description:
 
 ```
 ▾ users
@@ -157,11 +157,14 @@ gunicorn src.config.wsgi:application -c gunicorn.conf.py
     └─ views.py # Endopints / post-controller
 ```
 
-**Database:**
+---
+</br>
+
+
+## 🛢 Database Schema:
 
 ```mermaid
 erDiagram
-
     Users {
         int id
         string frist_name
@@ -197,11 +200,148 @@ erDiagram
     Tickets ||--o{ Comments : ""
     Comments ||--o{ Comments : ""
 ```
+---
+</br>
+</br>
+
+# ♾️ Deployment
+
+## Abbreviations:
+
+- CS - Cloud Service
+- WinOS - Windows
+- VM - Virtual Machine
+
+
+</br>
+
+## Workflow:
+
+1. Check if your local project works correctly.
+2. Choose your cloud service 
+3. Create a VM (for example, Digital Ocean gives a name as Droplet).
+4. Select operation system and make initial hardware settings.
+5. Choose an authentication method. Most popular are SSH(recommended) and HTTPS. 
+    
+    **Note:** If you select WinOS, you need to install GIT and Putty (terminal emulator and SSH client) on your local machine.
+    
+6. If you choose SSH (recommended) - create public and private key. If you use WinOS - use GIT GUI to create private and public key for your CS.  For Unix you can use the next bash command:
+    
+    ```bash
+    ssh-keygen -t rsa -b 4096 -f ~/.ssh/mykey
+    ```
+    
+7. Ensure than VW was created. If creating process was finished, your CS gives you public (IP for external connections) and private IP(IP for internal connections inside the selected CS. So you can connect your VM`s inside CS network).
+8. Connect to your VM via SSH. Run the code:
+    
+    ```bash
+    ssh <Public IP> -i <Private ssh file> -l <Defaut User>
+    
+    #Alternative command
+    ssh <Defaut User>@<Public IP> -i <Private ssh file>
+    ```
+    
+    To simplify ssh connection you can use ssh config file. It looks like .yml file but technically it is run like .py file.  In more detail you can find our in
+    
+    [SSH config file syntax and how-tos for configuring the OpenSSH client](https://www.ssh.com/academy/ssh/config)
+    
+    Config:
+    
+    ```bash
+    #===============
+    # [Support App]
+    #===============
+    Host Support_app
+    	HostName <ip_address>
+    	Port <port>
+    	User <user>
+    	IdentityFile ~/.ssh/id_rsa
+    	
+    ```
+    
+9. Install Docker:
+    
+    ```bash
+    # Uninstall old versions of Docker
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    
+    # Update the apt package index and install packages to allow 
+    # apt to use a repository over HTTPS
+    
+    sudo apt-get update
+    sudo apt-get install \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
+    
+    # Add Docker’s official GPG key
+    sudo mkdir -m 0755 -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    
+    # Use the following command to set up the repository
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    
+    # Update the apt package index
+    sudo apt-get update
+    
+    # Install Docker Engine, containerd, and Docker Compose.
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    
+    # Install Docker-compose
+    apt install docker-compose
+    
+    # Check Docker status
+    sudo systemctl status docker
+    ```
+    
+    You can also install via alternative package manager Snap:
+    
+    [Install docker on Ubuntu using the Snap Store | Snapcraft](https://snapcraft.io/install/docker/ubuntu)
+    
+10. Clone project from GitHub:
+    
+    ```bash
+    # Install SSH keys
+    ssh-keygen -t rsa -b 4096 -C "support_app"
+    
+    # Add SSH public key to GIT hub account
+    
+    # Copy project from GitHub reprository
+    git clone git@github.com:mmedchuk/support_app.git
+    ```
+    
+11. Create .env from .env.default:
+    
+    ```bash
+    cp env.default .env
+    ```
+    
+12. Configure env variables in .env via Nano or Vim. Remove port binding in Postgres (is recommended for higher security of the project).
+13. Build project running command:
+    
+    ```bash
+    docker-compose build
+    ```
+    
+14. Check IP connection in eth0 using ifconfig from nettools package:
+    
+    ```bash
+    apt install nettools
+    ```
+    
+
+15. Try to connect via browser. Insert your public IP and port to the adress field and press enter. Done
+
+---
+</br>
 
 ## ⌛ Release History
 
 *1.0.0 Work in progress*
 
-- Initial app version
+- First release
 
 ### To be continued…
