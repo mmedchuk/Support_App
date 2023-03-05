@@ -21,7 +21,6 @@ RUN pip install --upgrade pip pipenv setuptools
 COPY Pipfile Pipfile.lock ./
 RUN pipenv sync --system ${PIPENV_EXTRA_ARGS}
 
-
 # Current PATH where Docker will copy a current project into folder 'APP'. 
 # ROOT PATH is a path were Dockerfile is created
 COPY . /app
