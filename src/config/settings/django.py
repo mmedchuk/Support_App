@@ -8,7 +8,7 @@ ROOT_DIR = SRC_DIR.parent
 SECRET_KEY = getenv("DJANGO_SECRET_KEY", default="INVALID")
 DEBUG = strtobool(getenv("DJANGO_DEBUG", default="0"))
 ALLOWED_HOSTS = getenv("DJANGO_ALLOWED_HOSTS", default="").split(",")
-CSRF_TRUSTED_ORIGINS = getenv("CSRF_TRUSTED_ORIGINS", default=[])  # type: ignore
+CSRF_TRUSTED_ORIGINS = ["http://localhost:1300", "http://127.0.0.1:1300"]
 
 
 DJANGO_APPS = [

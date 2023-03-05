@@ -34,7 +34,8 @@ services:
     depends_on:
       - "postgres" 
     volumes:
-      - ".:/app/" 
+      - ".:/app/"
+      - "static_volume:/home/app/staticfiles/" 
     ports:
       - "8000"
 
