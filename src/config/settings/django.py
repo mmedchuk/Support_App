@@ -1,3 +1,4 @@
+from distutils.util import strtobool
 from os import getenv
 from pathlib import Path
 
@@ -5,7 +6,7 @@ SRC_DIR = Path(__file__).resolve().parent.parent.parent
 ROOT_DIR = SRC_DIR.parent
 
 SECRET_KEY = getenv("DJANGO_SECRET_KEY", default="INVALID")
-DEBUG = getenv("DJANGO_DEBUG", default=False)
+DEBUG = strtobool(getenv("DJANGO_DEBUG", default="0"))
 ALLOWED_HOSTS = getenv("DJANGO_ALLOWED_HOSTS", default="").split(",")
 
 
@@ -63,11 +64,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": getenv("DB_NAME"),
-        "USER": getenv("DB_USER"),
-        "PASSWORD": getenv("DB_PASSWORD"),
-        "HOST": getenv("DB_HOST"),
-        "PORT": getenv("DB_PORT"),
+        "NAME": getenv("DB_NAME", default="support"),
+        "USER": getenv("DB_USER", default="postgres"),
+        "PASSWORD": getenv("DB_PASSWORD", default="postgres"),
+        "HOST": getenv("DB_HOST", default="postgres"),
+        "PORT": getenv("DB_PORT", default=5432),
     }
 }
 
