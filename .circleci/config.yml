@@ -1,42 +1,43 @@
 version: 2.1
 
+orbs:
+  python: circleci/python@1.5.0
+
 jobs:
-  build:
+  check-code-quality:
     docker:
-      - image: circleci/python:3.10
-    working_directory: ~/repo
-    environment:
-      - PIPENV_VENV_IN_PROJECT=1
+      - image: cimg/python:3.10.7
     steps:
       - checkout
-      - setup_remote_docker
+      - python/install-packages:
+          pkg-manager: pipenv
       - run:
-          name: Install system dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y \
-              postgresql-client \
-              gettext \
-              libpq-dev \
-              build-essential \
-              python3-dev
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
-            - v1-dependencies-
+          name: Run linter
+          command: pipenv run flake8 .
       - run:
-          name: Install Python dependencies
-          command: |
-            pip install --user pipenv
-            pipenv install --dev --system --deploy
-      - save_cache:
-          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ~/.local/share/virtualenvs/
+          name: Check formatting
+          command: pipenv run black --check . && pipenv run isort --check-only .
       - run:
-          name: Lint code
-          command: |
-            pipenv run flake8 .
-            pipenv run mypy .
-            pipenv run isort --check-only --diff .
-            pipenv run black --check .
+          name: Check static types
+          command: pipenv run mypy .
+  run-linter:
+         
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - check-code-quality
+      - hold-deploy:
+          type: approval
+          requires:
+            - check-code-quality
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - hold-deploy
+          filters:
+            branches:
+              only: master
