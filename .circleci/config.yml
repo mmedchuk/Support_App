@@ -1,43 +1,43 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@1.5.0
-
 jobs:
-  check-code-quality:
+  build:
     docker:
-      - image: cimg/python:3.10.7
+      - image: circleci/python:3.10
+
+    working_directory: ~/repo
+
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pipenv
-      - run:
-          name: Run linter
-          command: pipenv run flake8 .
-      - run:
-          name: Check formatting
-          command: pipenv run black --check . && pipenv run isort --check-only .
-      - run:
-          name: Check static types
-          command: pipenv run mypy .
-  run-linter:
-         
 
+      # Install dependencies
+      - run:
+          name: Install Dependencies
+          command: |
+            pip install pipenv
+            pipenv install --dev --system --deploy
+      # Run black
+      - run:
+          name: Run Black
+          command: |
+            pipenv run black --check .
+      # Run isort
+      - run:
+          name: Run isort
+          command: |
+            pipenv run isort --check .
+      # Run Flake8
+      - run:
+          name: Run Flake8
+          command: |
+            pipenv run flake8 .
+      # Run mypy
+      - run:
+          name: Run Mypy
+          command: |
+            pipenv run mypy .
 workflows:
   version: 2
-  build-and-deploy:
+  build:
     jobs:
-      - check-code-quality
-      - hold-deploy:
-          type: approval
-          requires:
-            - check-code-quality
-          filters:
-            branches:
-              only: master
-      - deploy:
-          requires:
-            - hold-deploy
-          filters:
-            branches:
-              only: master
+      - build
