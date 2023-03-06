@@ -10,7 +10,7 @@ services:
       - app
     restart: "on-failure"
     volumes:
-      - "static_volume:/home/app/staticfiles/"
+      - "static_volume:/app/staticfiles/"
         
   postgres:
     image: "postgres:14"
@@ -35,7 +35,7 @@ services:
       - "postgres" 
     volumes:
       - ".:/app/"
-      - "static_volume:/home/app/staticfiles/" 
+      - "static_volume:/app/staticfiles/" 
     ports:
       - "8000"
 
