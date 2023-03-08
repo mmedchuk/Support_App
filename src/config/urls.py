@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 
-from config.settings.openapi import schema_view
+from config.settings.openapi_conf import schema_view
 
 v1: list = [
     path("admin/", admin.site.urls),
