@@ -46,7 +46,8 @@ plugins = [
 mypy_path = 'src'
 exclude = [
 'shared', 
-'migrations'
+'migrations',
+'openapi'
 ]
 follow_imports = 'silent'
 warn_redundant_casts = true
