@@ -210,7 +210,7 @@ erDiagram
 </br>
 
 # Application architecture:
-![archtecture](https://user-images.githubusercontent.com/61584045/223881891-ea98a091-e85f-41fe-87e6-9790aee8738f.png)
+![archtecture](https://raw.githubusercontent.com/mmedchuk/support_app/main/img/architecture.png)
 
 
 ---
