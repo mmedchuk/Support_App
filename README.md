@@ -8,6 +8,7 @@
 </a>
 
 ![Build Status](https://github.com/mmedchuk/support_app/actions/workflows/code_quality.yml/badge.svg?branch=main)
+[![CircleCi](https://circleci.com/gh/circleci/support_app.svg?style=svg)](https://app.circleci.com/pipelines/github/mmedchuk/support_app)
 
 </br>
 
