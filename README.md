@@ -32,6 +32,10 @@
 **Additional tools**
 - ✔️ [Docker](https://www.docker.com)
 - ✔️ [Gunicorn](https://gunicorn.org/)
+- ✔️ [NGINX](https://nginx.org/ru/)
+- ✔️ [Celery](https://docs.celeryq.dev/en/stable/)
+- ✔️ [Redis](https://redis.io/)
+
 
 ---
 </br>
@@ -202,6 +206,12 @@ erDiagram
 ```
 ---
 </br>
+</br>
+
+# Application architecture:
+[!architecture](/img/archtecture.png)
+
+---
 </br>
 
 # ♾️ Deployment
