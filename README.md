@@ -209,7 +209,8 @@ erDiagram
 </br>
 
 # Application architecture:
-[!architecture](/img/archtecture.png)
+![archtecture](https://user-images.githubusercontent.com/61584045/223881891-ea98a091-e85f-41fe-87e6-9790aee8738f.png)
+
 
 ---
 </br>
