@@ -3,3 +3,6 @@ run:
 
 cqch:
 	black . && isort . && flake8 . && mypy .
+
+celery:
+	celery -A config worker -l INFO

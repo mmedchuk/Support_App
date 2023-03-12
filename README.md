@@ -15,8 +15,8 @@
 <p align="left"><span style="font-style: italic; font-weight: bold">Support app</span> is an application created to help in communication with customers to solve issues. It`s suitable for projects were communication app between users is needed like web services, marketplaces, online shops, etc... </p>
 </br>
 
----
-## 🔌 Application is powered by
+
+## 🔌 Application is powered by:
 
 **Core tools**
 
@@ -38,7 +38,7 @@
 - ✔️ [Redis](https://redis.io/)
 
 
----
+
 </br>
 
 ## ⚠️ Mandatory steps
@@ -132,12 +132,15 @@ docker-compose logs --tail 10 app
 # get flowed logs
 docker-compose logs -f app
 ```
-
+---
 </br>
 
-## ➕ Additional information
 
-### Usefull commands:
+
+## ➕ Additional information
+</br>
+
+### ⌨️ Usefull commands:
 
 ```bash
 # Run project with Gunicorn server
@@ -146,11 +149,14 @@ gunicorn src.config.wsgi:application --localhost:8000
 # Run project with Gunicorn server configused in the separate conf.file
 gunicorn src.config.wsgi:application -c gunicorn.conf.py
 
+# Run Celery 
+celery -A config worker -l INFO
+
 ```
 ---
 </br>
 
-## 🧩 Application description:
+### 🧩 Application description:
 
 ```
 ▾ users
@@ -166,7 +172,8 @@ gunicorn src.config.wsgi:application -c gunicorn.conf.py
 </br>
 
 
-## 🛢 Database Schema:
+### 🛢 Database Schema:
+
 
 ```mermaid
 erDiagram
@@ -209,11 +216,11 @@ erDiagram
 </br>
 </br>
 
-# Application architecture:
+###  🔮 Application architecture:
 ![archtecture](https://raw.githubusercontent.com/mmedchuk/support_app/main/img/architecture.png)
 
 
----
+</br>
 </br>
 
 # ♾️ Deployment
