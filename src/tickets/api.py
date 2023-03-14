@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 
+from config.celery import demo_task
 from shared.serializers import ResponseMultiSerializer, ResponseSerializer
 from tickets.models import Ticket
 from tickets.permissions import IsManagerProcessing, IsOwner, RoleIsAdmin, RoleIsManager, RoleIsUser
@@ -33,6 +34,10 @@ class TicketAPISet(ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def list(self, request, *args, **kwargs):
+
+        # This task bloks I/O
+        demo_task.delay()
+
         queryset = self.get_queryset()
         serializer = TicketLightSerializer(queryset, many=True)
         response = ResponseMultiSerializer({"results": serializer.data})

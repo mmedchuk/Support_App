@@ -12,6 +12,7 @@ Pydantic = "~=1.10.2"
 psycopg2-binary =  "==2.9.5"
 requests = "==2.28.1"
 drf-yasg = "==1.21.5"
+celery = {version = "==5.2.7", extras = ["redis"]}
 
 
 
